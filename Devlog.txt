@@ -1,0 +1,16 @@
+10.25.2026
+Features added:
+-Head collision fixed
+-bouncing on ground fixed
+
+initially i didnt really know how to fix the issues with the code.
+i spent a bit of time trying to find out why the head bounced against the ceiling and changing the code to
+try and kill the velocity, but it was still jumping for longer.
+I had to change the jumpforce as well to make sure it set the velocity to 0 without going back up to what the jumpforce was set to on
+the next frame.
+
+For fixing the bouncing, i had to make it so the conditions for the normal material were easier to reapply, allowing it to be active on either grounded being true 
+or canjump being true instead of just one.
+
+I couldn't figure out how to implement the new area when jumping at the top of the screen unfortunately, but would like to try and figure it out
+for the next project, as well as refining some of the movement.
