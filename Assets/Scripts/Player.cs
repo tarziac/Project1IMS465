@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     private bool isGrounded;
 
+    public Transform ceilingCheck;
+
+    public float ceilingCheckRadius = 0.4f;
+
     private bool canJump = true;
     private Rigidbody2D rb;
 
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour
             canJump = false;
             Invoke("ResetJump", .6f);
         }
-        if (isGrounded)
+        if (isGrounded || canJump)
         {
             rb.sharedMaterial = normalMat;
         }
@@ -68,12 +72,20 @@ public class Player : MonoBehaviour
         {
             rb.sharedMaterial = bounceMat;
         }
+        
+
     }
 
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        
+
+        if(Physics2D.OverlapCircle(ceilingCheck.position, ceilingCheckRadius, groundLayer))
+        {
+            jumpForce = 0;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -1);
+            
+        }
     }
     private void ResetJump()
     {
